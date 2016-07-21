@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Register for TUHUR</title>
+        <meta name="description" content="Tell us how you are.">
+        <meta name="viewport" content="initial-scale=1">
+
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+
+    <body>
+        <h1>Sign Up</h1>
+        <form id="registrationForm" class="registration-form">
+            <fieldset class="regisration-form__input-section">
+                <label for="">Name<span class="registration__asterisk">*</span></label>
+                <input required type="text" id="nameInput">
+            </fieldset>
+            <fieldset class="regisration-form__input-section">
+                <label for="">Email<span class="registration__asterisk">*</span></label>
+                <input required type="email" id="emailInput">
+            </fieldset>
+            <fieldset class="regisration-form__input-section">
+                <label for="">Password<span class="registration__asterisk">*</span></label>
+                <input required minLength="6" type="password" id="passwordInput">
+            </fieldset>
+            <fieldset class="regisration-form__input-section">
+                <label for="">Confirm Password<span class="registration__asterisk">*</span></label>
+                <input required minLength="6" type="password" id="confirmPasswordInput">
+            </fieldset>
+            <fieldset class="regisration-form__input-section">
+                <label for="">Where did you hear about TUHUR?</label>
+               <select multiple id="selectDiscoverSource">
+                   <option value="word of mouth">Word of mouth</option>
+                   <option value="search">Search</option>
+                   <option value="social">Social</option>
+               </select>
+            </fieldset>
+            <fieldset class="regisration-form__input-section">
+                <label for="">How jacked up are you right now?</label>
+                <div class="registration-form__slider-container">
+                    <input id="jackedSlider" class="registration-form__slider-input" type="range" min="1" max="5" step="1">
+                    <output id="jackedSliderOutput" class="registration-form__slider-output" for="jackedSlider">3</output>
+                </div>
+            </fieldset>
+            <button type="submit" class="registration__submit-button ">Sign Up</button>
+            <div id="formMessageContainer" class="form-message">
+                <p id="formMessage"></p>
+            </div>
+        </form>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/js/main.js"></script>
+    </body>
+</html>

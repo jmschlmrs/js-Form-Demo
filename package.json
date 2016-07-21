@@ -1,0 +1,20 @@
+{
+  "name": "jquery-form-demo",
+  "version": "1.0.0",
+  "description": "basic form with jquery.",
+  "main": "app.js",
+  "scripts": {
+    "compile-scss": "node-sass ./scss -o ./css",
+    "watch:compile-scss": "node-sass ./public/scss -o ./public/css -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "node-sass": "^3.8.0",
+    "nodemon": "^1.9.2"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
