@@ -1,7 +1,7 @@
 {
-  "name": "jquery-form-demo",
+  "name": "js-form-demo",
   "version": "1.0.0",
-  "description": "basic form with jquery.",
+  "description": "basic form with vanilla js.",
   "main": "app.js",
   "scripts": {
     "compile-scss": "node-sass ./scss -o ./css",
