@@ -1,43 +1,50 @@
-$('document').ready(function() {
+(function() {
     
     // set initial slider output value
-    var jackedSliderOutput = $('#jackedSliderOutput');
-    jackedSliderOutput.val($('#jackedSlider').val());
+    var jackedSliderOutput = document.getElementById('jackedSliderOutput');
+    var jackedSlider = document.getElementById('jackedSlider');
+    jackedSliderOutput.value = jackedSlider.value;
 
     // attach event handlers
-    $('#jackedSlider').on('change', function(event) {
-        jackedSliderOutput.val(event.target.value);
+    jackedSlider.addEventListener('change', function(event) {
+        jackedSliderOutput.value = event.target.value
     });
-    $('#registrationForm').on('submit', function(event) {
+
+    var registrationForm = document.getElementById('registrationForm');
+    registrationForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         var formData = {
-            name: $(this).find('#nameInput').val(),
-            email: $(this).find('#emailInput').val(),
-            password: $(this).find('#passwordInput').val(),
-            confirmPassword: $(this).find('#confirmPasswordInput').val(),
-            discoverSource: $(this).find('#selectDiscoverSource').val(),
-            howJacked: $(this).find('#jackedSlider').val()
+            name: event.target.querySelector('#nameInput').value,
+            email: event.target.querySelector('#emailInput').value,
+            password: event.target.querySelector('#passwordInput').value,
+            confirmPassword: event.target.querySelector('#confirmPasswordInput').value,
+            discoverSource: [],
+            howJacked: event.target.querySelector('#jackedSlider').value,
         };
+        var selectedOptions = event.target.querySelector('#selectDiscoverSource').selectedOptions
+        for (var i=0; i<selectedOptions.length; i++) {
+            formData.discoverSource.push(selectedOptions[i].value);
+        }
 
-        $.ajax('/register', {
-            contentType: 'application/json',
-            data: JSON.stringify(formData),
-            dataType: 'JSON',
-            type: 'post',
+        fetch('/register', {
+            method: 'post',
+            body: JSON.stringify(formData),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
         })
-        .done(function(data) {
-            console.dir(data);
-            $('#formMessage').text('Successfully registered as ' + data.name + '.')
-            $('#formMessageContainer').css('visibility','visible');
+        .then(function(res) { 
+            return res.json(); 
         })
-        .fail(function(error) {
-            $('#formMessage').text('Registration error.');
-            $('#formMessageContainer').css({
-                'visibility': 'visible',
-                'background-color': 'red'
-            });
+        .then(function(data) { 
+            document.querySelector('#formMessage').innerHTML = 'Successfully registered as ' + data.name + '.';
+            document.querySelector('#formMessageContainer').style.visibility = 'visible';
+        })
+        .catch(function(error) {
+            document.querySelector('#formMessage').innerHTML = 'Registration error.';
+            document.querySelector('#formMessageContainer').style.cssText = 'visibility: visible; background-color: red';
         });
     });
 
-});
+})();
